@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<robot name="gripx" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="material" params="name rgba">
+    <material name="${name}">
+      <color rgba="${rgba}" />
+    </material>
+  </xacro:macro>
+
+  <xacro:material name="orange" rgba="1 0.67 0.11 1"/>
+  <xacro:material name="dark_green" rgba="0.05 0.54 0.27 1"/>
+  <xacro:material name="silver" rgba="0.3 0.3 0.3 1"/>
+  <xacro:material name="black" rgba="0.05 0.32 0.48 1"/>
+
+  <link name="base_footprint"></link>
+
+  <!-- BASE_LINK -->
+  <joint name="base_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_footprint" />
+    <child link="base_link" />
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="2.8988502670443706e-05 0.0 0.050751622031372644" rpy="0 0 0" />
+      <mass value="123.6397481901343" />
+      <inertia ixx="1.064219" iyy="2.768722" izz="3.619812" ixy="0.0" iyz="-0.0" ixz="0.000882" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- RIGHT WHEEL LINK -->
+  <joint name="right_wheel_joint" type="continuous">
+    <origin xyz="-0.2159 -0.1651 0.0381" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="right_wheel" />
+    <axis xyz="-1.0 -1.0 0.0" />
+  </joint>
+
+  <link name="right_wheel">
+    <inertial>
+      <origin xyz="-5.551115123125783e-17 -0.012700000000000017 1.3877787807814457e-17" rpy="0 0 0" />
+      <mass value="2.5258101064312513" />
+      <inertia ixx="0.002682" iyy="0.005092" izz="0.002682" ixy="0.0" iyz="0.0" ixz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.2159 0.1651 -0.0381" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/right_wheel_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin xyz="0.2159 0.1651 -0.0381" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/right_wheel_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- LEFT WHEEL LINK -->
+  <joint name="left_wheel_joint" type="continuous">
+    <origin xyz="-0.2159 0.1651 0.0381" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="left_wheel" />
+    <axis xyz="0.0 1.0 0.0" />
+  </joint>
+
+  <link name="left_wheel">
+    <inertial>
+      <origin xyz="-5.551115123125783e-17 0.012700000000000045 1.3877787807814457e-17" rpy="0 0 0" />
+      <mass value="2.5258101064312513" />
+      <inertia ixx="0.002682" iyy="0.005092" izz="0.002682" ixy="-0.0" iyz="-0.0" ixz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.2159 -0.1651 -0.0381" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/left_wheel_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin xyz="0.2159 -0.1651 -0.0381" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/left_wheel_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- LIDAR LINK -->
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.1016" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="lidar" />
+  </joint>
+
+  <link name="lidar">
+    <inertial>
+      <origin xyz="0.2 7.933799082645506e-18 0.03559747434885557" rpy="0 0 0" />
+      <mass value="4.499441777227881" />
+      <inertia ixx="0.004825" iyy="0.004825" izz="0.005706" ixy="0.0" iyz="-0.0" ixz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.0 -0.1016" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/lidar_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="dark_green" />
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.0 -0.1016" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/lidar_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- CAMERA LINK -->
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0.254 0.0 0.0508" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="camera" />
+  </joint>
+  <link name="camera">
+    <inertial>
+      <origin xyz="0.012535174738439403 -4.625670785259487e-17 0.040000000000680935" rpy="0 0 0" />
+      <mass value="0.33729749975754675" />
+      <inertia ixx="0.000218" iyy="2.8e-05" izz="0.000225" ixy="-0.0" iyz="-0.0" ixz="-0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.254 -0.0 -0.0508" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/camera_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="-0.254 -0.0 -0.0508" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gripx_simulation/robot_description/meshes/camera_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+</robot>
